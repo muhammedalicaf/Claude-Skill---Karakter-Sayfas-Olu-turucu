@@ -5,7 +5,7 @@ uygular.
 **NOT:** Bu yetenek Claude uygulaması içerisinde ''skill-generator'' yeteneği kullanılarak Opus 5 (High) ile birlikte geliştirilmiştir.
 
 **Örnek Girdi - Çıktı**
-[buraya görseller gelecek.]
+![Nihai Çıktı](karakter-sayfasi_altay_20260916_son.png)
 
 ## Özellikler
 - **Gelişmiş Mikro Detaylar:** Claude, gözlerde gradyan geçişli iris ve kulaklarda hafif ayva tüylerin bulunması gibi önceden tanımlanmış mikro detayları hazırladığı prompta enjekte eder.
