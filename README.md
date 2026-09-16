@@ -3,7 +3,9 @@ Claude'a ''Karakter Referans Sayfası (Character Sheets)'' oluşturma yeteneği 
 kareleri tek tek üretir, kalite denetimi yapar, panelleri birleştirir, son bir fotografik geçiş
 uygular ve çıktıyı tek bir arşiv olarak teslim eder.
 
-**NOT:** Bu yetenek Claude uygulaması içerisinde ''skill-generator'' yeteneği kullanılarak Opus 5 (High) ile birlikte geliştirilmiştir.
+**NOT:** Bu yetenek (v1.0) Claude uygulaması içerisinde ''skill-generator'' yeteneği kullanılarak Opus 5 (High) ile birlikte geliştirilmiştir.
+
+**NOT:** Yetenek Claude Code üzerinden Opus 5 (High) ile birlikte geliştirilmeye devam etmektedir.
 
 **Güncel sürüm: v2.0**
 
