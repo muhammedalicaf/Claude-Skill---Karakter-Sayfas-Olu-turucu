@@ -1,26 +1,37 @@
 # Claude Skill - Karakter Sayfası Oluşturucu
 Claude'a ''Karakter Referans Sayfası (Character Sheets)'' oluşturma yeteneği kazandıran Claude SKILL. Bu yetenek sayesinde Claude; görüşmeyi yönetir,
-kareleri tek tek üretir, kalite denetimi yapar, panelleri birleştirir ve son bir fotografik geçiş
-uygular.
+kareleri tek tek üretir, kalite denetimi yapar, panelleri birleştirir, son bir fotografik geçiş
+uygular ve çıktıyı tek bir arşiv olarak teslim eder.
 
 **NOT:** Bu yetenek Claude uygulaması içerisinde ''skill-generator'' yeteneği kullanılarak Opus 5 (High) ile birlikte geliştirilmiştir.
 
+**Güncel sürüm: v2.0** — [`karakter-sayfasi-olusturucu/`](./karakter-sayfasi-olusturucu/)
+v1.0 arşivi: [`v1/`](./v1/)
+
 ## Özellikler
 - **Gelişmiş Mikro Detaylar:** Claude, gözlerde gradyan geçişli iris ve kulaklarda hafif ayva tüylerin bulunması gibi önceden tanımlanmış mikro detayları hazırladığı prompta enjekte eder.
-- **Yüksek Çözünürlük:** Her görsel 2K çözünürlükte ayrı ayrı üretilir. Karakter sayfası da benzer şekilde 2560x1440 çözünürlüğe sahiptir.
+- **4K Çözünürlük:** Her görsel 4K çözünürlükte ayrı ayrı üretilir. Karakter sayfası da benzer şekilde 3840x2160 çözünürlüğe sahiptir.
 - **Kalite Kontrol ve Revizyon Mekanizması:** Claude, otonom şekilde her ürettiği görsele tek tek kalite kontrol uygular. Onay almayan görselleri, promptu revize ederek yeniden üretir. Onay konusunda kararsız kaldığı ve kabiliyetlerini aşan durumlarda görseli kullanıcının onayına sunar.
-- **Yüksek Tutarlılık:** İlk üretilen profil her görselin için temel referanstır. Bunu sağlamak için her üretilen görsel, önceki görseller ile birlikte bir sonraki görseli besler.
+- **Yüksek Tutarlılık:** İlk üretilen portre her görselin temel referansıdır; tam boy kareler ayrıca birbirini besler.
+- **Kadraj Esneme Payı:** Karakterin kadrajda kapladığı orandaki %10'a kadar sapma tolere edilir; gereksiz yeniden üretim yapılmaz.
+- **Karakter Künyesi:** Üretim bittikten sonra karaktere kısa bir Türkçe künye yazılır ve arşive konur. Künye prompta girmez; kimlik bloğunu kirletmez.
+- **Tek Dosya Teslimat:** Altı kare, referans sayfası ve künye tek bir `.zip` olarak verilir.
+- **Aksiyon Özeti:** Her üretimin sonunda ne üretildiğinin ve süreçte ne olduğunun kısa bir dökümü sunulur.
 - **Replicate MCP:** Görsel üretimi MCP aracılığıyla Replicate platformu üzerinden Nano Banana Pro modeli ile gerçekleştirilir.
 
 ## İş Akışı
-1. **Kullanıcı ile Diyalog:** Karakterin görünümü ve kimliği üzerine soru-cevap formatında diyalog gerçekleştirilir.
+1. **Kullanıcı ile Diyalog:** Karakterin görünümü ve kimliği üzerine soru-cevap formatında, Türkçe diyalog gerçekleştirilir.
 2. **Profil Taslağı:** Claude, aldığı cevaplar doğrultusunda hazırladığı profil taslağını kullanıcının onayına sunar.
-3. **Referans Görselin Üretimi:** Karakterin ilk görseli üretilerek kimlik referansı hazırlanır ve kullanıcıya sunulur. Onay alırsa asıl üretim başlar.
-4. **Diğer Görünümlerin Üretimi:** Onaylanan kimlik üzerinden karakterin 5 farklı stilde görünümü hazırlanır.
+3. **Referans Görselin Üretimi:** Karakterin ön portresi üretilerek kimlik referansı hazırlanır ve kullanıcıya sunulur. Onay alırsa asıl üretim başlar.
+4. **Diğer Görünümlerin Üretimi:** Önce kalan üç portre, ardından iki tam boy kare üretilir. Kimlik yüzde okunduğu için portreler öne alınmıştır; olası bir kimlik kayması zincir bozulmadan görülür.
 5. **Panelleri Birleştirme:** Önceden hazırlanmış ve yetenek içerisinde tanımlanmış şablon üzerinden ''python script'' ile görseller mozaik düzeninde birleştirilir.
 6. **Fotoğrafik Geçiş:** Adobe Lightroom uygulaması üzerinden kalibre edilmiş ölçüm değerleri ''python script'' formatında uygulanır. Bu işlemdeki amaç yapay zeka görsel modellerinin kronik problemi olan ''aşırı doygun ve PVC görünümü'' azaltmaktır.
+7. **Künye ve Paketleme:** Karakterin künyesi yazılır; kareler, sayfa ve künye sabit isimlendirmeyle tek `.zip` hâline getirilir.
+8. **Teslim ve Aksiyon Özeti:** Arşiv verilir ve yapılan işlemlerin kısa dökümü sunulur.
 
 ## Örnek Workflow
+_Aşağıdaki ekran görüntüleri v1 akışına aittir; v2'nin görselleri ilk üretimden sonra güncellenecektir._
+
 _Oluşturma İşlemini Başlatıyoruz_
 ![Oluşturma İşlemini Başlatıyoruz.](./assets/gorsel_1.jpg)
 
@@ -41,38 +52,47 @@ _Nihai Çıktı_
 
 ## Proje Yapısı
 ```
-karakter-sayfasi-olusturucu/
+karakter-sayfasi-olusturucu/   # v2.0 - güncel sürüm
 ├── SKILL.md   # Yetenek sayfası
 ├── references/
-│   ├── gorusme.md   # Kullanıcı ile kurulacak diyaloğun genel çerçevesi    
-│   ├── prompt-mimarisi.md   # Promptların nasıl üretilecği konusunda yarı esnek yarı sabit açıklamalar
-│   ├── kalite-kontrol.md   #  Üretilen görsellere kalite kontrol uygulama rehberi
-│   └── sayfa-duzeni.md   # Mozaik düzeninin nasıl sağlanacağı ve ızgara yapısı    
+│   ├── gorusme.md   # Kullanıcı ile kurulacak diyaloğun genel çerçevesi
+│   ├── prompt-mimarisi.md   # Promptların nasıl üretileceği konusunda yarı esnek yarı sabit açıklamalar
+│   ├── kalite-kontrol.md   # Üretilen görsellere kalite kontrol uygulama rehberi
+│   ├── sayfa-duzeni.md   # Mozaik düzeninin nasıl sağlanacağı ve ızgara yapısı
+│   └── teslimat.md   # Künye, isimlendirme, arşivleme ve aksiyon özeti
 └── scripts/
     ├── birlestir.py   # Üretilen görselleri panel mantığı ile birleştiren script
-    └── foto_ayar.py   # Fotografik geçiş script'i
+    ├── foto_ayar.py   # Fotografik geçiş script'i
+    └── paketle.py   # Teslimatı tek .zip hâline getiren script
+
+v1/                            # v1.0 - arşiv, değiştirilmez
+└── karakter-sayfasi-olusturucu/
 ```
 
 ## Yol Haritası
+### v2.0
+Mevcut sürüm ve kullanıma hazır. v1'de tespit edilen hataların ve istenen geliştirmelerin karşılıkları:
+
+| Madde | Karşılanma biçimi |
+|---|---|
+| **Gelişmiş Kimlik Atama** | Karaktere 2-3 cümlelik Türkçe künye yazılıp arşive konuyor. Künye prompta girmez; kimlik bloğu görselin tek kaynağı olarak kalır (`references/teslimat.md`) |
+| **İletişim Dili Optimizasyonu** | `gorusme.md`'ye "Dil" bölümü eklendi: kullanıcıya dönük her satır Türkçe. Promptların İngilizce olması iç işleyiştir |
+| **Bildirim Stili Değişikliği** | Durum mesajları doğrudan sohbete düz metin olarak yazılıyor; özet paneline ya da toplu özete bırakılmıyor |
+| **Üretim Sırası Değişikliği** | Sıra 3 → 4 → 5 → 6 → 1 → 2 oldu: portreler önce, tam boylar sonra |
+| **Zip Formatında Sıkıştırma** | Yeni `scripts/paketle.py`; kullanıcıya sohbette yalnızca `.zip` veriliyor |
+| **İsimlendirme Formatı Güncellemesi** | `<İsim> <Çekim Türü>.png`, `<İsim> - Karakter Referans Sayfası.png`, `<İsim> - Künye.md`, `<İsim>.zip` |
+| **Kadraj Oranı Esneklik Payı** | Kadraj denetimi mutlak ölçek yerine sapma oranına taşındı; %10'a kadar sapma tolere ediliyor. v1'deki eşik kaynak karenin piksel boyutuna bağlı olduğu için 4K'ya çıkıldığında doğru kadrajlı kareler de yanlış alarm veriyordu |
+| **Karakter Duruşu Değişikliği** | 3/4 karelerde artık yalnızca baş değil gövde de dönüyor; uzak omuz geride, yakın omuz önde |
+| **Çözünürlük Artışı** | Kareler 4K üretiliyor, sayfa 3840x2160 |
+| **Aksiyon Özeti** | Teslimattan sonra karakterin, üretilen kare sayısının, yeniden üretimlerin ve uygulanan işlemlerin dökümü yazılıyor |
+
+Ek olarak `foto_ayar.py`'de gren tane boyutu görüntü genişliğine göre ölçekleniyor; kalibrasyon 2048 piksellik bir çiftte yapıldığı için 4K sayfada tane görece inceliyordu. Renk ve ton boru hattı değişmedi.
+
 ### v1.0
-Mevcut sürüm ve kullanıma hazır.
+[`v1/`](./v1/) klasöründe arşivlendi. Değiştirilmez; geri dönüş noktasıdır.
 
-### v2 - Planlandı
-Tespit edilen hatalar ve istenen geliştirmeler doğrultusunda aşağıdaki güncellemeler gerçekleştirilecektir;
-
-- **Gelişmiş Kimlik Atama:** Gerçekçiliği ve kaliteyi arttırmak için oluşturulan karakterlere kısa bir biyografi ataması yapılacaktır.
-- **İletişim Dili Optimizasyonu:** Opus 5 modeli daima türkçe iletişim kuruyor ancak Sonnet 5 modeli bazen İngilizce diyalog kuruyor. Bu sapma ''daima Türkçe konuşması için'' eklenecek bir satır ile çözülecek.
-- **Bildirim Stili Değişikliği:** Bildirimler kullanıcıya ''Summary'' paneli üzerinden değil doğrudan sohbete yazarak aktarılacak.
-- **Üretim Sırası Değişikliği:** İş akışı, ilk olarak portreleri üretip daha sonra tam boy görselleri üretecek şekilde güncellenecek.
-- **Zip Formatında Sıkıştırma:** Model, kullanıcıya görselleri sohbet içerisinde ayrı ayrı dosyalar olarak değil tek bir .zip dosyası olarak vermeli.
-- **İsimlendirme Formatı Güncellemesi:** Dosyaları isimlendirilmesi şu formatta sabitlenecek:
-	- Görseller --> [İsim] [Çekim Türü]
-	- Referans Sayfası --> [İsim] - Karakter Referans Sayfası
-	- Klasör --> [İsim].zip
-- **Kadraj Oranı Esneklik Payı:** Model, üretilen görsellerin kadraj oranı birebir tutmadığı için hata mesajı vermekte. Ancak bu oranlar tolere edilebilir düzeyde esnetilebilir. Bunun için ilgili python betiğine %10 esneme payı eklenecek.
-- **Karakter Duruşu Değişikliği:** Çapraz profil görsellerde, karakter sadece kafasını sağ ve sol taraflara çeviriyor. Bunun yerine komple vücudu sağ/sol çapraza dönük olmalı.
-- **Çözünürlük Artışı:** Üretilen görsellerin ve referans sayfasının çözünürlüğü 2K'dan 4K'ya yükseltilecek.
-- **Aksiyon Özeti:** Her üretimden sonra, üretilen karakterin ve yapılan işlemlerin kısa bir dökümü sunulacak.
+### v3 - Planlandı
+- **Künyenin Fiziksel İze Çevrilmesi:** Künyedeki uğraş ve yaşam bilgisinin ölçülebilir fiziksel karşılıklarının (güneş görmüş ten, nasırlı eller, duruş, bakım düzeyi) prompta enjekte edilmesi. v2'de kapsam dışı bırakıldı; künye şu an yalnızca teslimat belgesi.
 
 ## Lisans
 Bu proje [MIT Lisansı](LICENSE) ile lisanslanmıştır.
