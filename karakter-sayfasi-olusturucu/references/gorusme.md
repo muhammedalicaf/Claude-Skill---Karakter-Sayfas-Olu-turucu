@@ -2,6 +2,16 @@
 
 Karakterin kullanıcıdan nasıl alınacağı ve kimlik bloğuna (B) nasıl çevrileceği.
 
+## Dil
+
+**Kullanıcıyla daima Türkçe konuşulur.** Sorular, profil özeti, durum mesajları, uyarılar,
+künye ve aksiyon özeti — kullanıcının gördüğü her satır Türkçedir. Kullanıcı İngilizce yazsa
+bile karşılık Türkçe verilir; dil değişikliği yalnızca kullanıcı açıkça isterse yapılır.
+
+Tek istisna promptlardır: görsel modeline gönderilen metin İngilizce yazılır
+(`prompt-mimarisi.md`) ve kullanıcıya zaten gösterilmez. Bu, iç işleyiştir; sohbetin dilini
+değiştirmez.
+
 ## Ton
 
 Teknik bir brief alan fotoğraf yönetmeni gibi konuş: **analitik ve profesyonel.** Eksik olanı
@@ -68,9 +78,21 @@ varsayılanla doldurulur ve tek satırda kullanıcıya bildirilir.
 10. Yüz kılı — yok / üç günlük / sakal biçimi
 11. Ayırt edici işaretler — ben, çil, yara izi, gamze (en fazla 2; fazlası kimliği bulanıklaştırır)
 12. **Vücut tipi\*** — zayıf, atletik, dolgun; omuz genişliği, boy izlenimi
-13. Karakter adı — yalnızca dosya adı için, göresele yazılmaz
+13. Karakter adı — dosya adları ve künye için, görsele yazılmaz
 
 Varsayılanlar: kaş "doğal kalınlıkta, düz"; ağız "orta dolgunlukta"; yüz kılı "yok"; işaret "yok".
+
+### Künye alanları (zorunlu değil)
+
+Aşağıdaki iki alan yalnızca **künyeyi** besler; kimlik bloğuna ve prompta girmez, göresele
+etkisi yoktur (bkz. `teslimat.md`).
+
+14. Uğraş ya da meslek
+15. Yaşadığı yerin havası ve genel mizaç
+
+Bunlar için ayrı bir soru turu açılmaz. Kullanıcı tarifi sırasında kendiliğinden söylediyse
+alınır; söylemediyse **sorulmaz ve künyede boş geçilir.** Sayfa bu bilgiler olmadan da eksiksiz
+üretilir; künye kısalır, o kadar.
 
 ## Referans fotoğraf geldiğinde
 
@@ -94,7 +116,8 @@ zorunlu alanlar sorulur. Kullanıcının zaten söylediğini tekrar sormak gör�
 Sorular bitince Türkçe, maddeli, kısa bir profil özeti gösterilir ve onay alınır. Onay alınmadan
 üretim başlamaz. Bu, kullanıcının kendi tarifini okuyup düzeltebileceği tek noktadır.
 
-Özetin ardından üretim maliyeti tek satırda söylenir (kare sayısı ve tahmini ücret).
+Özetin ardından üretim maliyeti tek satırda söylenir: altı kare 4K çözünürlükte tek tek
+üretilir, hatalı çıkan kareler yeniden üretilir ve her üretim ayrıca ücretlendirilir.
 
 ## Kimlik bloğunun (B) yazımı
 

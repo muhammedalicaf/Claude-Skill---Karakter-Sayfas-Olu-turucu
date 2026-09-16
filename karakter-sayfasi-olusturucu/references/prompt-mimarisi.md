@@ -10,11 +10,15 @@ betimlemeyi belirgin biçimde daha iyi karşılıyor); kullanıcıyla konuşma d
 | | Değer |
 |---|---|
 | Model | `google/nano-banana-pro` |
-| Çözünürlük | `resolution: "2K"` — büyük harf, `"1K"`/`"2K"`/`"4K"` dışında değer reddedilir |
+| Çözünürlük | `resolution: "4K"` — büyük harf, `"1K"`/`"2K"`/`"4K"` dışında değer reddedilir |
 | Çıktı | `output_format: "png"` |
 | Oran: kare 1 ve 2 | `aspect_ratio: "9:16"` |
 | Oran: kare 3-6 | `aspect_ratio: "1:1"` |
-| Kimlik referansı | `image_input: [<kare 3'ün URL'i>]` |
+| Kimlik referansı | `image_input: [<kare 3'ün URL'i>, ...]` |
+
+**Kare numaraları hücre numaralarıdır**, üretim sırası değil. 1-6 numaraları
+`sayfa-duzeni.md`'deki ızgara gözlerine karşılık gelir ve dosya adlarında da bu sıra kullanılır.
+Üretim ise aşağıdaki sırayla yapılır; ikisi v2'de kasten farklıdır.
 
 Her kare ayrı bir istektir. `Prefer: wait` ile çağrıldığında sonuç aynı yanıtta döner.
 
@@ -27,7 +31,24 @@ Tek prompt tutarlılık getirmez; kimlik ilk kareye bağlanır.
 1. **Kare 3 (ön portre)** önce üretilir. Kullanıcı referans fotoğraf verdiyse o fotoğrafın URL'i
    `image_input` içinde geçer; vermediyse yalnızca metinden üretilir.
 2. Kare 3 **kullanıcıya sunulur ve onaylanır.** Onaylanmadan hiçbir kare üretilmez.
-3. Kalan beş kare, `image_input` alanında kare 3'ün URL'i ile üretilir.
+3. Kalan beş kare **portreler önce, tam boylar sonra** üretilir:
+
+   | Üretim sırası | Hücre | Kare | `image_input` |
+   |---|---|---|---|
+   | 1 | 3 | Ön Portre | (yok ya da kullanıcının referans fotoğrafı) |
+   | 2 | 4 | Sol 3/4 Portre | `[kare 3]` |
+   | 3 | 5 | Sağ 3/4 Portre | `[kare 3]` |
+   | 4 | 6 | Arka Portre | `[kare 3]` |
+   | 5 | 1 | Ön Profil | `[kare 3]` |
+   | 6 | 2 | Arka Profil | `[kare 3, kare 1]` |
+
+   Portreler önce üretilir çünkü kimlik yüzde okunur: dört portre aynı baş-omuz kadrajından
+   çıktığı için kimlik kayması erken görünür ve zincir bozulmadan düzeltilebilir. Tam boy
+   kareler kimliği en az taşıyan, duruşu en çok taşıyan karelerdir; en sona bırakılır.
+
+   Arka profil (hücre 2), ön profilin de beslendiği tek karedir: boy, duruş ve gövde oranı ön
+   profille tutmak zorunda, bunu da ancak onu görerek tutturur. Diğerlerinde tek referans kare
+   3'tür — referans yığmak kimliği güçlendirmez, aksine ortalama bir yüze kaydırır.
 4. Referans görsel **kimlik metnini geçersiz kılmaz**: B bloğu (kimlik) altı promptta da aynen
    tekrarlanır. Referans + metin birlikte, tek başına her birinden daha kararlı sonuç verir.
 
@@ -90,6 +111,10 @@ Yerde gölge zorunlu değildir; olursa da sorun değil, yoksa da. Zorlanmaz, son
 
 85mm ve aynı ışık kurulumu altı karede sabittir: odak uzaklığı ya da ışık yönü değişirse yüz
 geometrisi değişir ve kareler aynı kişi olmaktan çıkar.
+
+**Tek istisna `shoulders square`dir.** 3/4 karelerde (4 ve 5) gövde de dönük olduğu için bu
+ifade A bloğundaki gövde tarifiyle çelişir. O iki karede D bloğu `shoulders square` olmadan
+yazılır; ışık, mekân, ifade ve objektif aynen kalır.
 
 ## E — Mikro detaylar (değişmez)
 
@@ -178,11 +203,14 @@ individually distinguishable eyebrow hairs, lip micro wrinkles and vermilion bor
 
 **4 — Sol 3/4 portre (sol yanak kamerada)**
 ```
-head-and-shoulders three-quarter portrait photograph, the head turned about 40 degrees to the
-subject's own right so that the subject's LEFT cheek faces the camera and the face is angled
-toward the left side of the frame, the far eye and the far cheekbone partially visible, the nose
-line clear of the cheek contour, gaze following the direction of the head, shoulders nearly
-square to the camera, tight framing from the top of the head to the upper chest,
+head-and-shoulders three-quarter portrait photograph, the whole body turned about 40 degrees to
+the subject's own right, the torso and both shoulders rotated with the head in the same
+direction so that the chest does not face the camera, the far shoulder receding behind the near
+shoulder, the near shoulder closer to the lens, the head aligned with the turned body so that
+the subject's LEFT cheek faces the camera and the face is angled toward the left side of the
+frame, the far eye and the far cheekbone partially visible, the nose line clear of the cheek
+contour, gaze following the direction of the head, tight framing from the top of the head to
+the upper chest,
 micro detail concentrated along the near side: pores and vellus hair across the left cheek and
 jaw, the left ear fully visible with subsurface scattering through the cartilage, depth shadows
 inside the ear folds, nose pores in raking light, lash separation on the near eye
@@ -190,11 +218,14 @@ inside the ear folds, nose pores in raking light, lash separation on the near ey
 
 **5 — Sağ 3/4 portre (sağ yanak kamerada)**
 ```
-head-and-shoulders three-quarter portrait photograph, the head turned about 40 degrees to the
-subject's own left so that the subject's RIGHT cheek faces the camera and the face is angled
-toward the right side of the frame, the far eye and the far cheekbone partially visible, the nose
-line clear of the cheek contour, gaze following the direction of the head, shoulders nearly
-square to the camera, tight framing from the top of the head to the upper chest,
+head-and-shoulders three-quarter portrait photograph, the whole body turned about 40 degrees to
+the subject's own left, the torso and both shoulders rotated with the head in the same
+direction so that the chest does not face the camera, the far shoulder receding behind the near
+shoulder, the near shoulder closer to the lens, the head aligned with the turned body so that
+the subject's RIGHT cheek faces the camera and the face is angled toward the right side of the
+frame, the far eye and the far cheekbone partially visible, the nose line clear of the cheek
+contour, gaze following the direction of the head, tight framing from the top of the head to
+the upper chest,
 micro detail concentrated along the near side: pores and vellus hair across the right cheek and
 jaw, the right ear fully visible with subsurface scattering through the cartilage, depth shadows
 inside the ear folds, nose pores in raking light, lash separation on the near eye, the natural
@@ -216,17 +247,20 @@ both ear rims
 ## Birleştirilmiş örnek prompt
 
 Kare 4 için, bütün bloklar sırasıyla, gerçekte gönderilen hâliyle. Kimlik bloğu örnektir;
-üretimde `gorusme.md` çıktısıyla değişir, geri kalan her şey aynen kalır.
+üretimde `gorusme.md` çıktısıyla değişir, geri kalan her şey aynen kalır. 3/4 karesi olduğu için
+D bloğunda `shoulders square` geçmez — gövde dönük.
 
 ```
-head-and-shoulders three-quarter portrait photograph, the head turned about 40 degrees to the
-subject's own right so that the subject's LEFT cheek faces the camera and the face is angled
-toward the left side of the frame, the far eye and the far cheekbone partially visible, the nose
-line clear of the cheek contour, gaze following the direction of the head, shoulders nearly
-square to the camera, tight framing from the top of the head to the upper chest, micro detail
-concentrated along the near side: pores and vellus hair across the left cheek and jaw, the left
-ear fully visible with subsurface scattering through the cartilage, depth shadows inside the ear
-folds, nose pores in raking light, lash separation on the near eye,
+head-and-shoulders three-quarter portrait photograph, the whole body turned about 40 degrees to
+the subject's own right, the torso and both shoulders rotated with the head in the same
+direction so that the chest does not face the camera, the far shoulder receding behind the near
+shoulder, the near shoulder closer to the lens, the head aligned with the turned body so that
+the subject's LEFT cheek faces the camera and the face is angled toward the left side of the
+frame, the far eye and the far cheekbone partially visible, the nose line clear of the cheek
+contour, gaze following the direction of the head, tight framing from the top of the head to
+the upper chest, micro detail concentrated along the near side: pores and vellus hair across the
+left cheek and jaw, the left ear fully visible with subsurface scattering through the cartilage,
+depth shadows inside the ear folds, nose pores in raking light, lash separation on the near eye,
 the identical original character, a man in his early thirties, olive skin, oval face with a
 defined jawline and mature adult bone structure, straight nose with a slightly broad tip,
 medium-full lips, deep-set hazel eyes with a slight downward outer tilt, thick straight dark
@@ -237,8 +271,7 @@ trousers, plain grey low-top sneakers, no jacket, no hat, no jewelry, no watch, 
 no accessories,
 photographed in a real photography studio against a plain mid-grey painted wall with natural
 falloff of light across the wall, large softbox key light with soft even fill, neutral relaxed
-expression, mouth closed, no smile, head level, shoulders square, photographed with an 85mm lens
-at f/5.6,
+expression, mouth closed, no smile, head level, photographed with an 85mm lens at f/5.6,
 extreme micro detail, skin with visible pores, fine lines, fine vellus hair, natural tonal
 transitions, faint natural redness, slightly uneven patches and natural asymmetry, eyes with
 micro capillaries in the sclera and a detailed gradient iris with natural color variation and
