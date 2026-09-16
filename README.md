@@ -7,10 +7,15 @@ uygular.
 
 **Örnek Workflow**
 ![Oluşturma İşlemini Başlatıyoruz.](Screenshot_20260916_084428_Samsung Browser.jpg)
+
 ![Profil Taslağı ve Onay](Screenshot_20260916_084445_Samsung Browser.jpg)
+
 ![Kimlik Referansının Üretilmesi ve Onaylanması](Screenshot_20260916_084450_Samsung Browser.jpg)
+
 ![Üretilen Görsellerin Sunulması](Screenshot_20260916_084456_Samsung Browser.jpg)
+
 ![Sohbetin Sonu](Screenshot_20260916_084505_Samsung Browser.jpg)
+
 ![Nihai Çıktı](karakter-sayfasi_altay_20260916_son.png)
 
 ## Özellikler
