@@ -5,16 +5,14 @@ uygular ve çıktıyı tek bir arşiv olarak teslim eder.
 
 **NOT:** Bu yetenek Claude uygulaması içerisinde ''skill-generator'' yeteneği kullanılarak Opus 5 (High) ile birlikte geliştirilmiştir.
 
-**Güncel sürüm: v2.0** — [`karakter-sayfasi-olusturucu/`](./karakter-sayfasi-olusturucu/)
-v1.0 arşivi: [`v1/`](./v1/)
+**Güncel sürüm: v2.0**
 
 ## Özellikler
 - **Gelişmiş Mikro Detaylar:** Claude, gözlerde gradyan geçişli iris ve kulaklarda hafif ayva tüylerin bulunması gibi önceden tanımlanmış mikro detayları hazırladığı prompta enjekte eder.
 - **4K Çözünürlük:** Her görsel 4K çözünürlükte ayrı ayrı üretilir. Karakter sayfası da benzer şekilde 3840x2160 çözünürlüğe sahiptir.
 - **Kalite Kontrol ve Revizyon Mekanizması:** Claude, otonom şekilde her ürettiği görsele tek tek kalite kontrol uygular. Onay almayan görselleri, promptu revize ederek yeniden üretir. Onay konusunda kararsız kaldığı ve kabiliyetlerini aşan durumlarda görseli kullanıcının onayına sunar.
 - **Yüksek Tutarlılık:** İlk üretilen portre her görselin temel referansıdır; tam boy kareler ayrıca birbirini besler.
-- **Kadraj Esneme Payı:** Karakterin kadrajda kapladığı orandaki %10'a kadar sapma tolere edilir; gereksiz yeniden üretim yapılmaz.
-- **Karakter Künyesi:** Üretim bittikten sonra karaktere kısa bir Türkçe künye yazılır ve arşive konur. Künye prompta girmez; kimlik bloğunu kirletmez.
+- **Karakter Künyesi:** Üretim bittikten sonra karaktere kısa bir Türkçe künye yazılır ve arşive konur.
 - **Tek Dosya Teslimat:** Altı kare, referans sayfası ve künye tek bir `.zip` olarak verilir.
 - **Aksiyon Özeti:** Her üretimin sonunda ne üretildiğinin ve süreçte ne olduğunun kısa bir dökümü sunulur.
 - **Replicate MCP:** Görsel üretimi MCP aracılığıyla Replicate platformu üzerinden Nano Banana Pro modeli ile gerçekleştirilir.
@@ -89,10 +87,8 @@ Mevcut sürüm ve kullanıma hazır. v1'de tespit edilen hataların ve istenen g
 Ek olarak `foto_ayar.py`'de gren tane boyutu görüntü genişliğine göre ölçekleniyor; kalibrasyon 2048 piksellik bir çiftte yapıldığı için 4K sayfada tane görece inceliyordu. Renk ve ton boru hattı değişmedi.
 
 ### v1.0
-[`v1/`](./v1/) klasöründe arşivlendi. Değiştirilmez; geri dönüş noktasıdır.
+[`v1/`](./v1/) klasöründe arşivlendi.
 
-### v3 - Planlandı
-- **Künyenin Fiziksel İze Çevrilmesi:** Künyedeki uğraş ve yaşam bilgisinin ölçülebilir fiziksel karşılıklarının (güneş görmüş ten, nasırlı eller, duruş, bakım düzeyi) prompta enjekte edilmesi. v2'de kapsam dışı bırakıldı; künye şu an yalnızca teslimat belgesi.
 
 ## Lisans
 Bu proje [MIT Lisansı](LICENSE) ile lisanslanmıştır.
