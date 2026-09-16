@@ -6,16 +6,11 @@ uygular.
 **NOT:** Bu yetenek Claude uygulaması içerisinde ''skill-generator'' yeteneği kullanılarak Opus 5 (High) ile birlikte geliştirilmiştir.
 
 **Örnek Workflow**
-![Oluşturma İşlemini Başlatıyoruz.](Screenshot_20260916_084428_Samsung Browser.jpg)
-
-![Profil Taslağı ve Onay](Screenshot_20260916_084445_Samsung Browser.jpg)
-
-![Kimlik Referansının Üretilmesi ve Onaylanması](Screenshot_20260916_084450_Samsung Browser.jpg)
-
-![Üretilen Görsellerin Sunulması](Screenshot_20260916_084456_Samsung Browser.jpg)
-
-![Sohbetin Sonu](Screenshot_20260916_084505_Samsung Browser.jpg)
-
+![Oluşturma İşlemini Başlatıyoruz.](gorsel_1.jpg)
+![Profil Taslağı ve Onay](gorsel_2.jpg)
+![Kimlik Referansının Üretilmesi ve Onaylanması](gorsel_3.jpg)
+![Üretilen Görsellerin Sunulması](gorsel_4.jpg)
+![Sohbetin Sonu](gorsel_5.jpg)
 ![Nihai Çıktı](karakter-sayfasi_altay_20260916_son.png)
 
 ## Özellikler
