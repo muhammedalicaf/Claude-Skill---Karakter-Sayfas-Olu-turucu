@@ -5,14 +5,6 @@ uygular.
 
 **NOT:** Bu yetenek Claude uygulaması içerisinde ''skill-generator'' yeteneği kullanılarak Opus 5 (High) ile birlikte geliştirilmiştir.
 
-**Örnek Workflow**
-![Oluşturma İşlemini Başlatıyoruz.](./assets/gorsel_1.jpg)
-![Profil Taslağı ve Onay](./assets/gorsel_2.jpg)
-![Kimlik Referansının Üretilmesi ve Onaylanması](./assets/gorsel_3.jpg)
-![Üretilen Görsellerin Sunulması](./assets/gorsel_4.jpg)
-![Sohbetin Sonu](./assets/gorsel_5.jpg)
-![Nihai Çıktı](./assets/karakter-sayfasi_altay_20260916_son.png)
-
 ## Özellikler
 - **Gelişmiş Mikro Detaylar:** Claude, gözlerde gradyan geçişli iris ve kulaklarda hafif ayva tüylerin bulunması gibi önceden tanımlanmış mikro detayları hazırladığı prompta enjekte eder.
 - **Yüksek Çözünürlük:** Her görsel 2K çözünürlükte ayrı ayrı üretilir. Karakter sayfası da benzer şekilde 2560x1440 çözünürlüğe sahiptir.
@@ -28,6 +20,24 @@ uygular.
 5. **Panelleri Birleştirme:** Önceden hazırlanmış ve yetenek içerisinde tanımlanmış şablon üzerinden ''python script'' ile görseller mozaik düzeninde birleştirilir.
 6. **Fotoğrafik Geçiş:** Adobe Lightroom uygulaması üzerinden kalibre edilmiş ölçüm değerleri ''python script'' formatında uygulanır. Bu işlemdeki amaç yapay zeka görsel modellerinin kronik problemi olan ''aşırı doygun ve PVC görünümü'' azaltmaktır.
 
+## Örnek Workflow
+_Oluşturma İşlemini Başlatıyoruz_
+![Oluşturma İşlemini Başlatıyoruz.](./assets/gorsel_1.jpg)
+
+_Profil Taslağı ve Onay_
+![Profil Taslağı ve Onay](./assets/gorsel_2.jpg)
+
+_Kimlik Referansının Üretilmesi ve Onaylanması_
+![Kimlik Referansının Üretilmesi ve Onaylanması](./assets/gorsel_3.jpg)
+
+_Üretilen Görsellerin Sunulması_
+![Üretilen Görsellerin Sunulması](./assets/gorsel_4.jpg)
+
+_Sohbetin Sonu_
+![Sohbetin Sonu](./assets/gorsel_5.jpg)
+
+_Nihai Çıktı_
+![Nihai Çıktı](./assets/karakter-sayfasi_altay_20260916_son.png)
 
 ## Proje Yapısı
 ```
