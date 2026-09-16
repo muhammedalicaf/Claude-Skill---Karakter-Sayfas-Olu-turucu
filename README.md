@@ -1,10 +1,16 @@
+# Claude Skill - Karakter Sayfası Oluşturucu
 Claude'a ''Karakter Referans Sayfası (Character Sheets)'' oluşturma yeteneği kazandıran Claude SKILL. Bu yetenek sayesinde Claude; görüşmeyi yönetir,
 kareleri tek tek üretir, kalite denetimi yapar, panelleri birleştirir ve son bir fotografik geçiş
 uygular.
 
 **NOT:** Bu yetenek Claude uygulaması içerisinde ''skill-generator'' yeteneği kullanılarak Opus 5 (High) ile birlikte geliştirilmiştir.
 
-**Örnek Girdi - Çıktı**
+**Örnek Workflow**
+![Oluşturma İşlemini Başlatıyoruz.](Screenshot_20260916_084428_Samsung Browser.jpg)
+![Profil Taslağı ve Onay](Screenshot_20260916_084445_Samsung Browser.jpg)
+![Kimlik Referansının Üretilmesi ve Onaylanması](Screenshot_20260916_084450_Samsung Browser.jpg)
+![Üretilen Görsellerin Sunulması](Screenshot_20260916_084456_Samsung Browser.jpg)
+![Sohbetin Sonu](Screenshot_20260916_084505_Samsung Browser.jpg)
 ![Nihai Çıktı](karakter-sayfasi_altay_20260916_son.png)
 
 ## Özellikler
