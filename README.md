@@ -71,22 +71,17 @@ v1/                            # v1.0 - arşiv, değiştirilmez
 
 ## Yol Haritası
 ### v2.0
-Mevcut sürüm ve kullanıma hazır. v1'de tespit edilen hataların ve istenen geliştirmelerin karşılıkları:
-
-| Madde | Karşılanma biçimi |
-|---|---|
-| **Gelişmiş Kimlik Atama** | Karaktere 2-3 cümlelik Türkçe künye yazılıp arşive konuyor. Künye prompta girmez; kimlik bloğu görselin tek kaynağı olarak kalır (`references/teslimat.md`) |
-| **İletişim Dili Optimizasyonu** | `gorusme.md`'ye "Dil" bölümü eklendi: kullanıcıya dönük her satır Türkçe. Promptların İngilizce olması iç işleyiştir |
-| **Bildirim Stili Değişikliği** | Durum mesajları doğrudan sohbete düz metin olarak yazılıyor; özet paneline ya da toplu özete bırakılmıyor |
-| **Üretim Sırası Değişikliği** | Sıra 3 → 4 → 5 → 6 → 1 → 2 oldu: portreler önce, tam boylar sonra |
-| **Zip Formatında Sıkıştırma** | Yeni `scripts/paketle.py`; kullanıcıya sohbette yalnızca `.zip` veriliyor |
-| **İsimlendirme Formatı Güncellemesi** | `<İsim> <Çekim Türü>.png`, `<İsim> - Karakter Referans Sayfası.png`, `<İsim> - Künye.md`, `<İsim>.zip` |
-| **Kadraj Oranı Esneklik Payı** | Kadraj denetimi mutlak ölçek yerine sapma oranına taşındı; %10'a kadar sapma tolere ediliyor. v1'deki eşik kaynak karenin piksel boyutuna bağlı olduğu için 4K'ya çıkıldığında doğru kadrajlı kareler de yanlış alarm veriyordu |
-| **Karakter Duruşu Değişikliği** | 3/4 karelerde artık yalnızca baş değil gövde de dönüyor; uzak omuz geride, yakın omuz önde |
-| **Çözünürlük Artışı** | Kareler 4K üretiliyor, sayfa 3840x2160 |
-| **Aksiyon Özeti** | Teslimattan sonra karakterin, üretilen kare sayısının, yeniden üretimlerin ve uygulanan işlemlerin dökümü yazılıyor |
-
-Ek olarak `foto_ayar.py`'de gren tane boyutu görüntü genişliğine göre ölçekleniyor; kalibrasyon 2048 piksellik bir çiftte yapıldığı için 4K sayfada tane görece inceliyordu. Renk ve ton boru hattı değişmedi.
+- **Gelişmiş Kimlik Atama:** Karakter sayfası oluşturmanın yanı sıra kısa bir kimlik tanımlaması fonksiyonu eklendi.
+- **İletişim Dili Optimizasyonu:** Model kullanıcı ile iletişimde bazen İngilizce bazen Türkçe konuşuyordu. Bu sorun düzeltildi.
+- **Bildirim Stili Değişikliği:** Loq kayıtları ‘’Summary’’ paneli üzerinden verilirken artık sohbet içerisine yazılıyor.
+- **Üretim Sırası Optimizasyonu:** Görsel üretiminde sıralama değiştirilerek karakter tutarlılığında artış sağlandı.
+- **Dosya Organizasyonu:** Üretilen görseller tek tek sohbet üzerinden verilirken ‘’.zip’’ formatında sıkıştırılarak organize halde verilmeye başlandı.
+- **İsimlendirme Formatı Güncellemesi:** İsimlendirme formatı daha açıklayıcı ve organize olacak şekilde optimize edildi.
+- **Kadraj Oranı Esnetildi:** Karakterin kadrajdaki oranı hatası %10 esneklik payı verilerek çözüldü.
+- **Poz Optimizasyonu:** Artık karakter çapraz profil görsellerinde sadece kafasını sağa sola çevirmiyor. Tüm vücudunu dönüyor.
+- **Çözünürlük Artışı:** Çıktı çözünürlüğü 2K’dan 4K’ya yükseltildi.
+- **Aksiyon Özeti:** İşlem tamamlandıktan sonra kullanıcıya kısa bir faliyet raporu veriliyor.
+- **Gren Optimizasyonu:** Gren tane boyutu 4K çözünürlüğe uyarlandı.
 
 ### v1.0
 [`v1/`](./v1/) klasöründe arşivlendi.
