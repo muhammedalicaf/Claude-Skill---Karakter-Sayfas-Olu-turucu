@@ -6,12 +6,12 @@ uygular.
 **NOT:** Bu yetenek Claude uygulaması içerisinde ''skill-generator'' yeteneği kullanılarak Opus 5 (High) ile birlikte geliştirilmiştir.
 
 **Örnek Workflow**
-![Oluşturma İşlemini Başlatıyoruz.](gorsel_1.jpg)
-![Profil Taslağı ve Onay](gorsel_2.jpg)
-![Kimlik Referansının Üretilmesi ve Onaylanması](gorsel_3.jpg)
-![Üretilen Görsellerin Sunulması](gorsel_4.jpg)
-![Sohbetin Sonu](gorsel_5.jpg)
-![Nihai Çıktı](karakter-sayfasi_altay_20260916_son.png)
+![Oluşturma İşlemini Başlatıyoruz.](./assets/gorsel_1.jpg)
+![Profil Taslağı ve Onay](./assets/gorsel_2.jpg)
+![Kimlik Referansının Üretilmesi ve Onaylanması](./assets/gorsel_3.jpg)
+![Üretilen Görsellerin Sunulması](./assets/gorsel_4.jpg)
+![Sohbetin Sonu](./assets/gorsel_5.jpg)
+![Nihai Çıktı](./assets/karakter-sayfasi_altay_20260916_son.png)
 
 ## Özellikler
 - **Gelişmiş Mikro Detaylar:** Claude, gözlerde gradyan geçişli iris ve kulaklarda hafif ayva tüylerin bulunması gibi önceden tanımlanmış mikro detayları hazırladığı prompta enjekte eder.
